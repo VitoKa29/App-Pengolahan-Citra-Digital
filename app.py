@@ -16,6 +16,7 @@ if uploaded_file is not None:
 
     # Create two columns
     col1, col2 = st.columns(2)
+    kol1, kol2, kol3 = st.columns(3)
 
     # Show original image in the first column
     with col1:
@@ -54,10 +55,21 @@ if uploaded_file is not None:
     
 
     if st.checkbox('Pixelate Image'):
-        pixel_size = st.slider('Pixelation Level', 1, 100, 10)
+        pixel_size = st.slider('Pixelation Level', 1, 50, 10)
         h, w = edited_image.shape[:2]
-        temp = cv2.resize(edited_image, (pixel_size, pixel_size), interpolation=cv2.INTER_LINEAR)
+        temp = cv2.resize(edited_image, (51-pixel_size, 51-pixel_size), interpolation=cv2.INTER_LINEAR)
         edited_image = cv2.resize(temp, (w, h), interpolation=cv2.INTER_NEAREST)
+        # with kol1:
+        #     st.write(image)
+        # with kol2:  
+        #     st.write(temp)
+        # with kol3:
+        #     st.write(edited_image)
+        # st.write(50-pixel_size)
+        # st.write(edited_image.shape)
+        # st.write(h)
+        # st.write(w)
+
 
     # Show edited image in the second column
     with col2:
